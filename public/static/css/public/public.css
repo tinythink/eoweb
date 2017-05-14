@@ -6,10 +6,27 @@
 
 /**
  *  top nav样式
- **************************
  */
 
 .page-nav {
     height: 80px;
     background-color: #1ABC9C;
+}
+
+/**
+ * ------------------
+ *  轮播
+ * -------------------
+ */
+.banner {
+    position: relative;
+    overflow: auto;
+}
+
+.banner li {
+    list-style: none;
+}
+
+.banner ul li {
+    float: left;
 }

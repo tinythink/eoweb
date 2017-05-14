@@ -6,12 +6,20 @@
     <link rel="stylesheet" href="/static/css/public/reset.css">
     <link rel="stylesheet" href="/static/css/public/utils.css">
     <link rel="stylesheet" href="/static/css/public/public.css">
+
 </head>
 <body>
 
 <div class="wrapper">
     <header class="page-nav">
         <nav class="container">泉州恒益餐饮食品有限公司</nav>
+        <section class="banner">
+            <ul>
+                <li>This is a slide.</li>
+                <li>This is another slide.</li>
+                <li>This is a final slide.</li>
+            </ul>
+        </section>
     </header>
     <article>
 
@@ -21,6 +29,12 @@
     </footer>
 </div>
 
-
+<script src="/static/libs/jquery/1.12.3/jquery.min.js"></script>
+<script src="/static/libs/unslider/js/unslider.js"></script>
+<script>
+    $(function() {
+        $('.banner').unslider();
+    });
+</script>
 </body>
 </html>
