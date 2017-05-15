@@ -6,7 +6,16 @@
     <link rel="stylesheet" href="/static/css/public/reset.css">
     <link rel="stylesheet" href="/static/css/public/utils.css">
     <link rel="stylesheet" href="/static/css/public/public.css">
-
+    <style>
+        .ico-right {
+            display: inline-block;
+            height: 24px;
+            width: 24px;
+            background: url("http://blog.fengdb.com/public/imgs/arrow-right.png")  no-repeat;
+            background-position: center;
+            background-size: 100%;
+        }
+    </style>
 </head>
 <body>
 
@@ -22,7 +31,7 @@
         </section>
     </header>
     <article>
-
+        <i class="ico-right"></i>
     </article>
     <footer>
 
@@ -34,6 +43,16 @@
 <script>
     $(function() {
         $('.banner').unslider();
+        $.ajax({
+            url: "",
+            methods: "get",
+            success: function (res) {
+
+            },
+            error: function (res) {
+
+            }
+        });
     });
 </script>
 </body>
