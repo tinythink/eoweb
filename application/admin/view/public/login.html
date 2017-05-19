@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>登录</title>
+    <link rel="stylesheet" href="/static/libs/bootstrap/css/bootstrap.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .login-form {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 420px;
+            height: 300px;
+            margin-left: -210px;
+            margin-top: -150px;
+            padding: 20px;
+        }
+        .error {
+            display: none;
+            padding: 15px 0;
+        }
+        .has-error .error {
+            display: block;
+            color: #a94442;
+        }
+        .has-success .error {
+            display: none;
+        }
+
+    </style>
+</head>
+<body >
+
+<form class="form form-horizontal login-form" id="loginForm">
+    <div class="form-group" id="userContainer">
+        <label class="control-label col-sm-3 col-md-3" for="username">用户名：</label>
+        <div class="col-sm-9 col-md-9">
+            <input type="text" class="form-control input-lg" id="username" placeholder="请输入手机号码/邮箱" required>
+            <div class="error">用户不存在</div>
+        </div>
+    </div>
+    <div class="form-group" id="pwdContainer">
+        <label class="control-label col-sm-3" for="username">密码：</label>
+        <div class="col-sm-9">
+            <input type="password" class="form-control input-lg" id="password" placeholder="请输入密码" required>
+            <div class="error">密码不正确</div>
+        </div>
+    </div>
+
+    <!--<div class="form-group">-->
+        <!--<label for="" class="col-sm-5 col-sm-offset-1">-->
+            <!--<input type="checkbox" >-->
+            <!--记住密码-->
+        <!--</label>-->
+    <!--</div>-->
+    <button type="button" class="btn btn-primary btn-block btn-lg" id="loginBtn">登录</button>
+</form>
+
+
+<script src="/static/libs/jquery/3.2.1/jquery-3.2.1.js"></script>
+<script>
+    var $username = $('#username'),
+        $password = $('#password'),
+        $userContainer = $('#userContainer'),
+        $pwdContainer = $('#pwdContainer');
+
+    $username.on('blur',function () {
+        var $this = $(this),
+            $next = $this.next();
+        if ($this.val().length > 0) {
+            $.post("/admin/login/find_user",{username:$username.val()},function (response) {
+                if (response.code !== "200") {
+                    $userContainer.addClass('has-error').removeClass('has-success');
+                    $next.html(response.desc);
+                } else {
+                    $userContainer.addClass('has-success').removeClass('has-error');
+                    $next.html('');
+                }
+            })
+        } else {
+            $userContainer.addClass('has-error').removeClass('has-success');
+            $next.html('请输入用户名');
+        }
+    });
+
+    $password.on('blur',function () {
+        var $this = $(this),
+            $next = $this.next();
+        if ($this.val().length === 0) {
+            $pwdContainer.addClass('has-error').removeClass('has-success');
+            $next.html('请输入用户名');
+        } else {
+            $pwdContainer.addClass('has-success').removeClass('has-error');
+            $next.html('');
+        }
+    });
+    $('#loginBtn').on('click',function () {
+        var user = $username.val(),
+            pwd = $password.val();
+        var $loginForm = $('#loginForm'),
+            $error = $loginForm.find('.has-error');
+        if ($error.length > 0) {
+            return alert($error.find('.error').html());
+        }
+        if (user.length > 0 && pwd.length > 0) {
+            $.ajax({
+                method: "post",
+                url: "/admin/login/do_login",
+                data: { username: user,password: pwd },
+                dataType: "json",
+                success: function (response) {
+                    if (response.code === "200") {
+                        window.location.href = "/admin/index/index";
+                    } else {
+                        alert(response.desc)
+                    }
+                }
+            })
+        } else {
+            alert("请输入登录信息");
+        }
+
+
+    })
+
+</script>
+</body>
+</html>

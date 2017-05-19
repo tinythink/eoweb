@@ -3,24 +3,25 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Db;
 use think\Request;
-class Hero extends Controller
+class Foods extends Controller
 {
-    public function __construct(Request $request)
-    {
-        parent::__construct($request);
-        header('Access-Control-Allow-Origin: *');
-        header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-    }
+//    public function __construct(Request $request)
+//    {
+//        parent::__construct($request);
+//        header('Access-Control-Allow-Origin: *');
+//        header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+//    }
 
-    public function add () {
+    public function add (Request $request) {
 
 //        if (!$http->isAjax()) {
 //            return json(array('code'=>101,'desc'=>'非法请求','data'=>null));
 //        }
-        $param = $this->request->param();
+        $param = $request->param();
 
         // 验证客户端传输的数据
         $validate = validate('Hero');
+
         if( !$validate->check($param) ){
             return json(array('code'=>110,'desc'=>'参数错误','data'=>[$validate->getError()]));
         }
