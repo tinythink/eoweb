@@ -34,24 +34,16 @@ class Foods extends Controller
         return json(array('code'=>103,'msg'=>'添加失败','data'=>null));
 
     }
-    public function addAll (Request $request) {
-
-//        if (!$http->isAjax()) {
-//            return json(array('code'=>101,'desc'=>'非法请求','data'=>null));
-//        }
-        $param = $request->param();
-        // 验证客户端传输的数据
-        $validate = validate('Hero');
-        if( !$validate->check($param) ){
-            return json(array('code'=>110,'desc'=>'参数错误','data'=>[$validate->getError()]));
+    public function upload(Request $request){
+        // 获取表单上传文件 例如上传了001.jpg
+        $file = $request->file('file');
+        // 移动到框架应用根目录/public/uploads/ 目录下
+        $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
+        $host = $_SERVER['HTTP_HOST'];
+        if($info){
+            return json(array('code'=>200,'msg'=>'上传成功','data'=>['url'=>$host.'/uploads/'.$info->getSaveName()]));
         }
-        $query = Db::name('heroes')->insertAll($param);
-
-        if ($query) {
-            return json(array('code'=>200,'msg'=>'插入成功','data'=>$query));
-        }
-        return json(array('code'=>103,'msg'=>'添加失败','data'=>null));
-
+        return json(array('code'=>103,'msg'=>'上传成功','data'=>$file->getError()));
     }
 
     public function getAll()

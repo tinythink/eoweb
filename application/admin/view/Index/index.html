@@ -1,3 +1,78 @@
 {extend name="public:base" /}
+{block name="css"}
+    <style>
+        legend {
+            padding: 15px 0;
+        }
+        .form {
+            padding: 15px;
+            border: 1px dashed gainsboro;
+        }
+    </style>
+{/block}
+{block name="title"}danshboard{/block}
 
+{block name="main"}
+<form class="form form-inline">
+    <fieldset>
+        <legend>类型管理</legend>
+        <div class="form-group">
+            <label for="foodType">类型</label>
+            <input type="text" class="form-control" id="foodType" placeholder="请输入类型名称" required>
+        </div>
+        <button type="button" class="btn btn-primary" id="addFoodType">新增</button>
+    </fieldset>
+</form>
 
+<form class="form form-inline" style="margin-top: 50px;">
+    <fieldset>
+        <legend>菜品管理</legend>
+        <div class="form-group col-md-3">
+            <label for="foodName1">菜品</label>
+            <input type="text" class="form-control " id="foodName1" placeholder="请输入类型名称" required>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="exampleInputEmail2">类型</label>
+            <select name="" id="" class="form-control">
+                <option value="">aaaaa</option>
+                <option value="">aaa</option>
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="exampleInputEmail2">上传菜品图片</label>
+            <input type="file" class="form-control">
+        </div>
+        <div class="form-group col-md-2">
+            <button type="button" class="btn btn-primary">新增</button>
+        </div>
+
+    </fieldset>
+</form>
+{/block}
+{block name="js"}
+<script>
+    $(document).ready(function () {
+        $('#addFoodType').on('click',function () {
+            var foodType = $('#foodType').val();
+
+            if (foodType.length > 0) {
+                $.ajax({
+                    url: "/admin/types/add",
+                    method: "post",
+                    data: {name: foodType},
+                    success: function (response) {
+                        console.log(response);
+                        if (response.code === 200) {
+                            alert(response.msg)
+                        } else if (response.code === 104){
+                            alert(response.msg)
+                        }
+                    }
+                })
+            } else {
+                alert('请填写类型名称')
+            }
+        })
+    })
+</script>
+{/block}

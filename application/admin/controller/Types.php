@@ -3,40 +3,34 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Db;
 use think\Request;
-use app\admin\model\TodoList;
-class Index extends Controller
+class Types extends Controller
 {
-    public function index ()
-    {
-        return $this->fetch("index/index");
-    }
-    public function login()
-    {
-        return $this->fetch('public/login');
-    }
 
 
 
 
-
-
-
-    public function addList (Request $request) {
+    public function add (Request $request) {
 
 //        if (!$http->isAjax()) {
 //            return json(array('code'=>101,'desc'=>'非法请求','data'=>null));
 //        }
         $data = [];
         $param = $request->param();
-        if ( !isset($param['list_name'])) {
-            return json(array('code'=>102,'desc'=>'请传入list_name','data'=>null));
+        if ( !isset($param['name'])) {
+            return json(array('code'=>102,'desc'=>'请传入name','data'=>null));
         }
-        $data['list_name'] = $param['list_name'];
+        $data['name'] = $param['name'];
+        $data['insert_time'] = time();
 
-        if (isset($param['remind_time']) && strlen($param['remind_time']) > 0) {
-            $data['remind_time'] = $request['remind_time'];
+        $type = Db::name('type');
+
+        $find = $type->where(["name"=>$param['name']])->find();
+
+        if (!empty($find)) {
+            return json(array('code'=>104,'msg'=>'重复','data'=>null));
         }
-        $query = Db::name('todo_list')->insert($data);
+
+        $query = $type->insert($data);
 
         if ($query) {
             return json(array('code'=>200,'msg'=>'插入成功','data'=>$query));
@@ -44,6 +38,34 @@ class Index extends Controller
         return json(array('code'=>103,'msg'=>'添加失败','data'=>null));
 
     }
+
+    public function del(Request $request)
+    {
+        // 获取客户端提交的数据
+        $post =  $request->only(['id'],'param');
+        $todo = Db::name('type');
+        $list = $todo->where(['id'=>$post['id']])
+            ->update(['status'=>0]);
+        if ($list) {
+            return json(array('code'=>200,'msg'=>'删除成功'));
+        }
+        return json(array('code'=>109,'msg'=>'删除失败'));
+    }
+
+    public function update(Request $request)
+    {
+        // 获取客户端提交的数据
+        $param=  $request->param();
+        $type = Db::name('type');
+        $list = $type->where(['id'=>$param['id']])
+            ->update($param);
+        if ($list) {
+            return json(array('code'=>200,'msg'=>'更新成功'));
+        }
+        return json(array('code'=>109,'msg'=>'更新失败'));
+    }
+
+
     public function addTask (Request $request) {
 //        if (!$http->isAjax()) {
 //            return json(array('code'=>101,'desc'=>'非法请求','data'=>null));
@@ -51,7 +73,7 @@ class Index extends Controller
         $data = [];
         $param = $request->param();
         if ( !isset($param['task_name'])) {
-            return json(array('code'=>102,'desc'=>'请传入task_name','data'=>null));
+            return json(array('code'=>102,'msg'=>'请传入task_name','data'=>null));
         }
         $data['task_name'] = $param['task_name'];
 
@@ -74,15 +96,5 @@ class Index extends Controller
         $list = $todo ->select();
 
         return json(array('code'=>200,'msg'=>'获取成功','data'=>$list));
-    }
-    public function update(Request $request)
-    {
-        // 获取客户端提交的数据
-        $post = Request::instance()->only(['id'],'param');
-        $todo = Db::name('todo_list');
-        $list = $todo->where(['status'=>$post['id']])
-            ->update();
-
-        return json($list);
     }
 }
