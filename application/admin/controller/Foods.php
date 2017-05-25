@@ -5,28 +5,38 @@ use think\Db;
 use think\Request;
 class Foods extends Controller
 {
-//    public function __construct(Request $request)
-//    {
+    public function index(Request $request)
+    {
 //        parent::__construct($request);
 //        header('Access-Control-Allow-Origin: *');
 //        header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-//    }
+//        $d = Db::table('eo_foods')->alias('f')->join('eo_type t','ON f.t_id = t.id','left')->where('status','>',0)->select();
+        $r = Db::query('SELECT * FROM eo_foods f LEFT JOIN eo_type t ON f.t_id = t.id  WHERE f.sts > 0 & t.sts > 0');
+        $d = Db::table('eo_foods')
+            ->alias('f')
+            ->join('eo_type t','f.t_id = t.id','LEFT')
+            ->field('f.id,f.name,f.insert_time,t.name as type,f.sts as fsts,t.sts as tsts')
+            ->where('t.sts','>',0)
+            ->where('f.sts','>',0)
+            ->select();
+
+        return json($d);
+    }
 
     public function add (Request $request) {
 
-//        if (!$http->isAjax()) {
-//            return json(array('code'=>101,'desc'=>'非法请求','data'=>null));
-//        }
         $param = $request->param();
 
         // 验证客户端传输的数据
-        $validate = validate('Hero');
-
-        if( !$validate->check($param) ){
-            return json(array('code'=>110,'desc'=>'参数错误','data'=>[$validate->getError()]));
+        if (!isset($param['name'])) {
+            return json(array('code'=>200,'msg'=>'请传入foodName'));
         }
 
-        $query = Db::name('heroes')->insert($param);
+        if (!isset($param['t_id'])) {
+            return json(array('code'=>200,'msg'=>'请传入食品类型'));
+        }
+        $param['insert_time'] = time();
+        $query = Db::name('foods')->insert($param);
 
         if ($query) {
             return json(array('code'=>200,'msg'=>'插入成功','data'=>$query));
@@ -46,52 +56,50 @@ class Foods extends Controller
         return json(array('code'=>103,'msg'=>'上传成功','data'=>$file->getError()));
     }
 
-    public function getAll()
+    public function del(Request $request)
     {
-
-        // 实例化模型，保存至数据库
-        $heroes = Db::name('heroes');
-
-        $list = $heroes ->select();
-
-        return json(array('code'=>200,'msg'=>'获取成功','data'=>$list));
-    }
-    public function findById(Request $request)
-    {
-
         // 获取客户端提交的数据
-        $post = $request->only(['id'],'param');
-        if (!isset($post['id'])) {
-            return json(array('code'=>110,'msg'=>'参数错误','data'=>null));
+        $post =  $request->only(['id'],'param');
+        $todo = Db::name('foods');
+        $list = $todo->where(['id'=>$post['id']])
+            ->update(['sts'=>0]);
+        if ($list) {
+            return json(array('code'=>200,'msg'=>'删除成功'));
         }
-        // 实例化模型，保存至数据库
-        $heroes = Db::name('heroes');
-
-        $list = $heroes ->where($post)->select();
-        return json(array('code'=>200,'msg'=>'获取成功','data'=>$list));
+        return json(array('code'=>109,'msg'=>'删除失败'));
     }
-    public function findByType(Request $request)
+    public function find(Request $request)
     {
-
         // 获取客户端提交的数据
-        $post = $request->only(['type'],'param');
-        if (!isset($post['type'])) {
-            return json(array('code'=>110,'msg'=>'参数错误','data'=>null));
+        $param=  $request->param();
+        if (!isset($param['id'])) {
+            return json(array('code'=>103,'msg'=>'参数不正确'));
         }
-        // 实例化模型，保存至数据库
-        $heroes = Db::name('heroes');
-
-        $list = $heroes ->where($post)->select();
-        return json(array('code'=>200,'msg'=>'获取成功','data'=>$list));
+        $type = Db::name('foods');
+        $list = $type->where(['id'=>$param['id']])
+            ->find();
+//        $data = Db::table('eo_foods')
+//            ->alias('f')
+//            ->join('eo_type t','f.t_id = t.id','LEFT')
+//            ->field('f.id,f.name,f.insert_time,t.name as type')
+//            ->where('t.sts','>',0)
+//            ->where('f.sts','>',0)
+//            ->select();
+        if ($list) {
+            return json(array('code'=>200,'msg'=>'查询成功','data'=>$list));
+        }
+        return json(array('code'=>109,'msg'=>'查询失败'));
     }
     public function update(Request $request)
     {
         // 获取客户端提交的数据
-        $post = Request::instance()->only(['id'],'param');
-        $todo = Db::name('todo_list');
-        $list = $todo->where(['status'=>$post['id']])
-            ->update();
-
-        return json($list);
+        $param=  $request->post();
+        $type = Db::name('foods');
+        $list = $type->where(['id'=>$param['id']])
+            ->update($param);
+        if ($list) {
+            return json(array('code'=>200,'msg'=>'更新成功'));
+        }
+        return json(array('code'=>109,'msg'=>'更新失败','data'=>$list));
     }
 }

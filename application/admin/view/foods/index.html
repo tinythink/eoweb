@@ -24,7 +24,7 @@
         <th>序号</th>
         <th>名称</th>
         <th>插入时间</th>
-        <th>缩略图</th>
+        <th>类型</th>
         <th>操作</th>
     </tr>
     </thead>
@@ -34,7 +34,7 @@
         <td>{$vo.id}</td>
         <td>{$vo.name}</td>
         <td>{$vo.insert_time|date='Y-m-d H:i:s',###}</td>
-        <td>{$vo.thumb}</td>
+        <td>{$vo.type}</td>
         <td data-id="{$vo.id}">
             <button type="button" class="btn btn-danger">删除</button>
             <button type="button" class="btn btn-primary edit">修改</button>
@@ -69,7 +69,6 @@
                             <label for="upload" class="control-label">缩略图:<span id="thumpUrl"></span></label>
                             <img src="" alt="" id="thumpImg">
                             <div id="upload"></div>
-
                         </div>
                         <!--<button type="button" class="btn btn-primary" id="addFoodType">新增</button>-->
                     </fieldset>
@@ -89,8 +88,10 @@
 <script src="/static/libs/huploadify/jquery.Huploadify.js" type="text/javascript"></script>
 <script>
     $(document).ready(function () {
-
-
+        var content = $('#content'),
+            modal = $('#modal'),
+            $el;
+        // 上传图片
         $('#upload').Huploadify({
             auto:false,
             fileTypeExts:'*.jpg;*.png;*.gif',
@@ -99,8 +100,8 @@
             fileSizeLimit:9999,
             showUploadedPercent:true,//是否实时显示上传的百分比，如20%
             showUploadedSize:true,
-            removeTimeout:30000,
-            uploader:'/food/upload',
+            removeTimeout:999999999,
+            uploader:'/upload',
             onUploadStart:function(){
 //                console.log('开始上传');
             },
@@ -127,6 +128,59 @@
             }
         });
 
+        // 新增
+        $('#addBtn').on('click',function () {
+            modal.modal('show');
+            modal.data('id','');
+            modal.data('type','add')
+        });
+
+
+        $('#save').on('click',function () {
+            modal.modal('hide');
+            var id = modal.data('id');
+            var thumpUrl = $('#thumpUrl').html(),
+                foodName = $('#foodName').val(),
+                foodType = $('#foodType').val(),
+                type = modal.data('type'),
+                url = "/food/add" ,
+                params = {name:foodName};// type === "add" ? {thumb: thumpUrl,name: foodName,t_id: foodType } : {thumb: thumpUrl,name: foodName,t_id: foodType,id:id };
+            if (type === "add") {
+                params = {thumb: thumpUrl,name: foodName,t_id: foodType };
+            } else {
+                url = "/food/update";
+                if (thumpUrl.length > 0) {
+                    params.thumb = thumpUrl;
+                }
+                if (foodName.length > 0) {
+                    params.name = foodName;
+                } else {
+                    return alert('请输入名称')
+                }
+                params.t_id = foodType;
+                params.id = id;
+            }
+            if (foodName.length > 0) {
+                $.ajax({
+                    url: url,
+                    method: "post",
+                    data: params,
+                    success: function (response) {
+                        console.log(response);
+                        if (response.code === 200) {
+//                            alert(response.msg)
+                            var timer = setTimeout(function () {
+                                window.location.reload();
+                                clearTimeout(timer);
+                            },500)
+
+                        }
+                    }
+                })
+            }
+
+        })
+
 
         $('#addFoodType').on('click',function () {
             var foodType = $('#foodType').val();
@@ -149,9 +203,7 @@
             }
         });
 
-        var content = $('#content'),
-            modal = $('#modal'),
-            $el;
+
         content.on('click','.btn-danger',function () {
             var $this = $(this),
                 pid = $this.parent().data('id'),
@@ -161,7 +213,7 @@
 
             if (condition) {
                 $.ajax({
-                    url: "/admin/types/del",
+                    url: "/food/del",
                     method: "post",
                     data: {id: pid},
                     success: function (response) {
@@ -175,40 +227,34 @@
                 })
             }
         });
-        $('#addBtn').on('click',function () {
-            modal.modal('show');
-        });
         content.on('click','.edit',function () {
-
+            modal.modal('show');
+            modal.data('type','edit');
             var $this = $(this),
                 $gp = $this.parent().prev().prev(),
                 id = $this.parent().data('id');
+
+            var thumpUrl = $('#thumpUrl'),
+                foodName = $('#foodName'),
+                foodType = $('#foodType');
             modal.data('id',id);
-            $el = $gp;
-        });
-
-        $('#save').on('click',function () {
-            modal.modal('hide');
-            var $this = $(this),
-                $gp = $this.parent().prev().prev(),
-                typeName = $('#typeName').val(),
-                id = modal.data('id');
-            if (typeName.length > 0) {
-                $.ajax({
-                    url: "/admin/types/update",
-                    method: "post",
-                    data: {id: id,name: typeName},
-                    success: function (response) {
-                        console.log(response);
-                        if (response.code === 200) {
-                            $el.html(typeName);
-                            alert(response.msg)
-                        }
+            $.ajax({
+                url: "/food/find",
+                method: "get",
+                data: {id: id},
+                success: function (response) {
+                    console.log(response);
+                    if (response.code === 200) {
+                        thumpUrl.html(response.data.thumb);
+                        foodName.val(response.data.name);
+                        foodType.val(response.data.t_id);
+                    } else {
+                        alert(response.msg)
                     }
-                })
-            }
+                }
+            })
 
-        })
+        });
     })
 </script>
 {/block}

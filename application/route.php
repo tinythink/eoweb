@@ -17,5 +17,13 @@ return [
         ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
         ':name' => ['index/hello', ['method' => 'post']],
     ],
-    '/food/upload' => 'admin/foods/upload'
+
+    '/upload' => 'admin/foods/upload',
+
+
+
+    '/food/add' => 'admin/foods/add',
+    '/food/del' => 'admin/foods/del',
+    '/food/find' => 'admin/foods/find',
+    '/food/update' => 'admin/foods/update'
 ];
