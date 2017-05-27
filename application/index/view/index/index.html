@@ -11,7 +11,7 @@
             display: inline-block;
             height: 24px;
             width: 24px;
-            background: url("http://blog.fengdb.com/public/imgs/arrow-right.png")  no-repeat;
+            background: url("http://blog.fengdb.com/public/imgs/arrow-right.png") no-repeat;
             background-position: center;
             background-size: 100%;
         }
@@ -20,39 +20,45 @@
 <body>
 
 <div class="wrapper">
-    <header class="page-nav">
-        <nav class="container">泉州恒益餐饮食品有限公司</nav>
-        <section class="banner">
-            <ul>
-                <li>This is a slide.</li>
-                <li>This is another slide.</li>
-                <li>This is a final slide.</li>
+    <header class="pager-header">
+        <nav class="container page-nav">泉州恒益餐饮食品有限公司</nav>
+        <div class="page-banner banner">
+            <ul style="height: 150px;">
+                <li><img src="/imgs/banner01.jpg" alt="" width="100%" height="150"></li>
+                <li><img src="/imgs/banner01.jpg" alt="" width="100%" height="150"></li>
+                <li><img src="/imgs/banner01.jpg" alt="" width="100%" height="150"></li>
             </ul>
-        </section>
+        </div>
+        <div class="nav-menu">
+
+        </div>
     </header>
     <article>
-        <i class="ico-right"></i>
+        <!--<i class="ico-right"></i>-->
     </article>
     <footer>
 
     </footer>
 </div>
 
-<script src="/static/libs/jquery/1.12.3/jquery.min.js"></script>
-<script src="/static/libs/unslider/js/unslider.js"></script>
+
+<script src="/static/libs/jquery/3.2.1/jquery-3.2.1.js"></script>
+<!--<script src="//code.jquery.com/jquery-latest.min.js"></script>-->
+
+<script src="//unslider.com/unslider.js"></script>
 <script>
-    $(function() {
+    $(function () {
         $('.banner').unslider();
-        $.ajax({
-            url: "",
-            methods: "get",
-            success: function (res) {
-
-            },
-            error: function (res) {
-
-            }
-        });
+//        $.ajax({
+//            url: "",
+//            methods: "get",
+//            success: function (res) {
+//
+//            },
+//            error: function (res) {
+//
+//            }
+//        });
     });
 </script>
 </body>

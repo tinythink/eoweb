@@ -3,29 +3,35 @@ namespace app\admin\controller;
 use app\admin\controller\base\BaseController;
 use think\Db;
 use think\Request;
-class Foods extends BaseController
+class News extends BaseController
 {
     public function index()
     {
-        $re = Db::query('select f.id,f.name,f.insert_time,t.name as type from eo_foods f LEFT JOIN eo_type t ON f.t_id = t.id where f.sts > 0');
-        $types = Db::name('type')->field(['id','name'])->select();
-        return $this->fetch('foods/index',array("active"=>"food","list"=>$re,"type"=>$types));
+        $list = Db::name('news')->where('sts > 0')->select();
+        return $this->fetch('news/index',array('list'=>$list,"active"=>"news"));
     }
-
-    public function add (Request $request) {
+    public function add()
+    {
+        return $this->fetch('news/add',array("active"=>"news"));
+    }
+    public function edit()
+    {
+        return $this->fetch('news/edit',array("active"=>"news"));
+    }
+    public function doAdd (Request $request) {
 
         $param = $request->param();
 
         // 验证客户端传输的数据
-        if (!isset($param['name'])) {
-            return json(array('code'=>200,'msg'=>'请传入foodName'));
+        if (!isset($param['title'])) {
+            return json(array('code'=>200,'msg'=>'请传入新闻标题'));
         }
 
-        if (!isset($param['t_id'])) {
-            return json(array('code'=>200,'msg'=>'请传入食品类型'));
+        if (!isset($param['content'])) {
+            return json(array('code'=>200,'msg'=>'请传入新闻内容'));
         }
         $param['insert_time'] = time();
-        $query = Db::name('foods')->insert($param);
+        $query = Db::name('news')->insert($param);
 
         if ($query) {
             return json(array('code'=>200,'msg'=>'插入成功','data'=>$query));
@@ -49,7 +55,7 @@ class Foods extends BaseController
     {
         // 获取客户端提交的数据
         $post =  $request->only(['id'],'param');
-        $todo = Db::name('foods');
+        $todo = Db::name('news');
         $list = $todo->where(['id'=>$post['id']])
             ->update(['sts'=>0]);
         if ($list) {
@@ -64,16 +70,9 @@ class Foods extends BaseController
         if (!isset($param['id'])) {
             return json(array('code'=>103,'msg'=>'参数不正确'));
         }
-        $type = Db::name('foods');
+        $type = Db::name('news');
         $list = $type->where(['id'=>$param['id']])
             ->find();
-//        $data = Db::table('eo_foods')
-//            ->alias('f')
-//            ->join('eo_type t','f.t_id = t.id','LEFT')
-//            ->field('f.id,f.name,f.insert_time,t.name as type')
-//            ->where('t.sts','>',0)
-//            ->where('f.sts','>',0)
-//            ->select();
         if ($list) {
             return json(array('code'=>200,'msg'=>'查询成功','data'=>$list));
         }
@@ -83,7 +82,7 @@ class Foods extends BaseController
     {
         // 获取客户端提交的数据
         $param=  $request->post();
-        $type = Db::name('foods');
+        $type = Db::name('news');
         $list = $type->where(['id'=>$param['id']])
             ->update($param);
         if ($list) {

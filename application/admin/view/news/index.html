@@ -11,12 +11,12 @@
     }
 </style>
 {/block}
-{block name="title"}danshboard{/block}
+{block name="title"}新闻列表{/block}
 
 {block name="main"}
 <form class="form">
-    <legend>食品管理</legend>
-    <button type="button" class="btn btn-primary" id="addBtn">新增</button>
+    <legend>新闻管理</legend>
+    <a href="/news/add" class="btn btn-primary" id="addBtn">添加新闻</a>
 </form>
 <table class="table table-hover table-bordered"  >
     <thead>
@@ -176,7 +176,7 @@
 
             if (condition) {
                 $.ajax({
-                    url: "/food/del",
+                    url: "/news/del",
                     method: "post",
                     data: {id: pid},
                     success: function (response) {
@@ -191,31 +191,8 @@
             }
         });
         content.on('click','.edit',function () {
-            modal.modal('show');
-            modal.data('type','edit');
-            var $this = $(this),
-                $gp = $this.parent().prev().prev(),
-                id = $this.parent().data('id');
-
-            var thumpUrl = $('#thumpUrl'),
-                foodName = $('#foodName'),
-                foodType = $('#foodType');
-            modal.data('id',id);
-            $.ajax({
-                url: "/food/find",
-                method: "get",
-                data: {id: id},
-                success: function (response) {
-                    console.log(response);
-                    if (response.code === 200) {
-                        thumpUrl.html(response.data.thumb);
-                        foodName.val(response.data.name);
-                        foodType.val(response.data.t_id);
-                    } else {
-                        alert(response.msg)
-                    }
-                }
-            })
+            var id = $(this).parent().data('id');
+            window.location.href = '/news/edit?id=' + id;
 
         });
     })

@@ -1,14 +1,18 @@
 <?php
 namespace app\admin\controller;
-use think\Controller;
+use app\admin\controller\base\BaseController;
 use think\Db;
 use think\Request;
-class Types extends Controller
+class Types extends BaseController
 {
 
 
 
-
+    public function index()
+    {
+        $data = Db::name('type')->where('sts','>',0)->select();
+        return $this->fetch('types/index',array("active"=>"type","list"=>$data));
+    }
     public function add (Request $request) {
 
 //        if (!$http->isAjax()) {

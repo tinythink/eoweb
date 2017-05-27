@@ -7,9 +7,21 @@
 /**
  *  top nav样式
  */
-
+.page-header {
+    /*height: 80px;*/
+    /*background-color: #1ABC9C;*/
+}
 .page-nav {
     height: 80px;
+    background-color: #1ABC9C;
+}
+
+.page-banner {
+    position: relative;
+    height: 150px;
+}
+.nav-menu {
+    height: 60px;
     background-color: #1ABC9C;
 }
 
@@ -19,14 +31,17 @@
  * -------------------
  */
 .banner {
-    position: relative;
+    /*position: relative;*/
     overflow: auto;
 }
 
 .banner li {
     list-style: none;
 }
-
+.banner li img {
+    height: 150px;
+    width: 100%;
+}
 .banner ul li {
     float: left;
 }

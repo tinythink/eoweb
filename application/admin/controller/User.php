@@ -6,22 +6,17 @@
  * Time: 16:22
  */
 namespace app\admin\controller;
-use think\Controller;
+use app\admin\controller\base\BaseController;
 use think\Db;
 use think\helper\hash\Md5;
 use think\Request;
 
 
-class Login extends Controller {
+class User extends BaseController {
 
-    public function _initialize()
+    public function index()
     {
-//        if (!empty(session('userlog'))) {
-//            return $this->redirect("Index/login");
-//        } else {
-////            return $this->redirect("Index/index");
-////            exit();
-//        }
+        return $this->fetch('user/login');
     }
 
     public function do_login (Request $request) {
@@ -60,5 +55,11 @@ class Login extends Controller {
             return json(array("code"=>"102","desc"=>"用户名不存在"));
         }
         return json(array("code"=>"200","desc"=>"请求成功"));
+    }
+
+    public function logout () {
+
+        session("userlog",null);
+        return json(array("code"=>"200","desc"=>"退出登录成功"));
     }
 }
