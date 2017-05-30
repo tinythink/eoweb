@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>企业网站</title>
     <link rel="stylesheet" href="/static/css/public/reset.css">
+    <link rel="stylesheet" href="/static/libs/pure/grids.css">
     <link rel="stylesheet" href="/static/css/public/utils.css">
     <link rel="stylesheet" href="/static/css/public/public.css">
     <style>
@@ -17,6 +18,25 @@
             background-position: center;
             background-size: 100%;
         }
+        .pure-g [class *= "pure-u"] {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: .5em;
+        }
+        .top-margin {
+            margin-top: 15px;
+        }
+        .item img {
+            border-radius: 4px;
+        }
+        .item p {
+            text-align: center;
+            padding-top: .5em;
+        }
+        /*.l-box {*/
+            /*padding: 1em;*/
+        /*}*/
     </style>
 </head>
 <body>
@@ -57,63 +77,121 @@
     </header>
     <!--主要内容-->
     <article class="container main-container clear">
-        <section class="menu-column">
-            <h3 class="pro-type">产品分类</h3>
-            <div class="type-list">
-                <section><a href="">早餐</a></section>
-                <section><a href="">早餐</a></section>
-                <section><a href="">早餐</a></section>
-                <section><a href="">早餐</a></section>
+        <div class="pure-g">
+            <div class="pure-u-1-5">
+                <h3 class="pro-type">产品分类</h3>
+                <div class="type-list">
+                    <section><a href="">早餐</a></section>
+                    <section><a href="">早餐</a></section>
+                    <section><a href="">早餐</a></section>
+                    <section><a href="">早餐</a></section>
+                </div>
+                <div class="contact">
+                    <h3 class="pro-type">联系我们</h3>
+                    <p>贵州恒亿餐饮管理有限公司<br>
+                        合作热线<br>
+                        欧先生：18585816588<br>
+                        黎先生：13662698058<br>
+                        <address>地址：贵州省贵阳市云岩区环城东路555号01层</address></p>
+                </div>
             </div>
-            <div class="contact">
-                <h3 class="pro-type">联系我们</h3>
-                <p>贵州恒亿餐饮管理有限公司<br>
-                    合作热线<br>
-                    欧先生：18585816588<br>
-                    黎先生：13662698058<br>
-                    地址：贵州省贵阳市云岩区环城东路555号01层</p>
+            <div class="pure-u-4-5">
+                <section class="breadcrumb">
+                    <span>一级导航</span><span style="color: #1c94c4;"> > </span><span>二级导航</span>
+                </section>
+                <div class="pure-g top-margin" >
+                    <section class="pure-u-1-4 item">
+                        <img src="/imgs/01.jpg" alt="" >
+                        <p>标题</p>
+                    </section>
+                    <section class="pure-u-1-4 item">
+                        <img src="/imgs/01.jpg" alt="" >
+                        <p class="" style="text-align: center;">标题</p>
+                    </section>
+                    <section class="pure-u-1-4 item">
+                        <img src="/imgs/01.jpg" alt="" >
+                        <p class="" style="text-align: center;">标题</p>
+                    </section>
+                    <section class="pure-u-1-4 item">
+                        <img src="/imgs/01.jpg" alt="" >
+                        <p class="" style="text-align: center;">标题</p>
+                    </section>
+                    <section class="pure-u-1-4 item">
+                        <img src="/imgs/01.jpg" alt="" >
+                        <p class="" style="text-align: center;">标题</p>
+                    </section>
+                    <section class="pure-u-1-4 item">
+                        <img src="/imgs/01.jpg" alt="" >
+                        <p class="" style="text-align: center;">标题</p>
+                    </section>
+                    <section class="pure-u-1-4 item">
+                        <img src="/imgs/01.jpg" alt="" >
+                        <p class="" style="text-align: center;">标题</p>
+                    </section>
+                    <section class="pure-u-1-4 item">
+                        <img src="/imgs/01.jpg" alt="" >
+                        <p class="" style="text-align: center;">标题</p>
+                    </section>
+                </div>
             </div>
-        </section>
+        </div>
+        <!--<section class="menu-column">-->
+            <!--<h3 class="pro-type">产品分类</h3>-->
+            <!--<div class="type-list">-->
+                <!--<section><a href="">早餐</a></section>-->
+                <!--<section><a href="">早餐</a></section>-->
+                <!--<section><a href="">早餐</a></section>-->
+                <!--<section><a href="">早餐</a></section>-->
+            <!--</div>-->
+            <!--<div class="contact">-->
+                <!--<h3 class="pro-type">联系我们</h3>-->
+                <!--<p>贵州恒亿餐饮管理有限公司<br>-->
+                    <!--合作热线<br>-->
+                    <!--欧先生：18585816588<br>-->
+                    <!--黎先生：13662698058<br>-->
+                    <!--地址：贵州省贵阳市云岩区环城东路555号01层</p>-->
+            <!--</div>-->
+        <!--</section>-->
 
-        <section class="content-column">
-            <section class="breadcrumb">
-                <span>一级导航</span><span style="color: #1c94c4;"> > </span><span>二级导航</span>
-            </section>
-            <div class="pro-list">
-                <section class="list-item">
-                    <img src="/imgs/01.jpg" alt="" >
-                    <p class="" style="text-align: center;">标题</p>
-                </section>
-                <section class="list-item">
-                    <img src="/imgs/01.jpg" alt="" >
-                    <p class="" style="text-align: center;">标题</p>
-                </section>
-                <section class="list-item">
-                    <img src="/imgs/01.jpg" alt="" >
-                    <p class="" style="text-align: center;">标题</p>
-                </section>
-                <section class="list-item">
-                    <img src="/imgs/01.jpg" alt="" >
-                    <p class="" style="text-align: center;">标题</p>
-                </section>
-                <section class="list-item">
-                    <img src="/imgs/01.jpg" alt="" >
-                    <p class="" style="text-align: center;">标题</p>
-                </section>
-                <section class="list-item">
-                    <img src="/imgs/01.jpg" alt="" >
-                    <p class="" style="text-align: center;">标题</p>
-                </section>
-                <section class="list-item">
-                    <img src="/imgs/01.jpg" alt="" >
-                    <p class="" style="text-align: center;">标题</p>
-                </section>
-                <section class="list-item">
-                    <img src="/imgs/01.jpg" alt="" >
-                    <p class="" style="text-align: center;">标题</p>
-                </section>
-            </div>
-        </section>
+        <!--<section class="content-column">-->
+            <!--<section class="breadcrumb">-->
+                <!--<span>一级导航</span><span style="color: #1c94c4;"> > </span><span>二级导航</span>-->
+            <!--</section>-->
+            <!--<div class="pro-list">-->
+                <!--<section class="list-item">-->
+                    <!--<img src="/imgs/01.jpg" alt="" >-->
+                    <!--<p class="" style="text-align: center;">标题</p>-->
+                <!--</section>-->
+                <!--<section class="list-item">-->
+                    <!--<img src="/imgs/01.jpg" alt="" >-->
+                    <!--<p class="" style="text-align: center;">标题</p>-->
+                <!--</section>-->
+                <!--<section class="list-item">-->
+                    <!--<img src="/imgs/01.jpg" alt="" >-->
+                    <!--<p class="" style="text-align: center;">标题</p>-->
+                <!--</section>-->
+                <!--<section class="list-item">-->
+                    <!--<img src="/imgs/01.jpg" alt="" >-->
+                    <!--<p class="" style="text-align: center;">标题</p>-->
+                <!--</section>-->
+                <!--<section class="list-item">-->
+                    <!--<img src="/imgs/01.jpg" alt="" >-->
+                    <!--<p class="" style="text-align: center;">标题</p>-->
+                <!--</section>-->
+                <!--<section class="list-item">-->
+                    <!--<img src="/imgs/01.jpg" alt="" >-->
+                    <!--<p class="" style="text-align: center;">标题</p>-->
+                <!--</section>-->
+                <!--<section class="list-item">-->
+                    <!--<img src="/imgs/01.jpg" alt="" >-->
+                    <!--<p class="" style="text-align: center;">标题</p>-->
+                <!--</section>-->
+                <!--<section class="list-item">-->
+                    <!--<img src="/imgs/01.jpg" alt="" >-->
+                    <!--<p class="" style="text-align: center;">标题</p>-->
+                <!--</section>-->
+            <!--</div>-->
+        <!--</section>-->
 
 
     </article>
