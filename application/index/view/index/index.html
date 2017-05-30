@@ -2,25 +2,158 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>企业网站</title>
     <link rel="stylesheet" href="/static/css/public/reset.css">
     <link rel="stylesheet" href="/static/css/public/utils.css">
     <link rel="stylesheet" href="/static/css/public/public.css">
+    <style>
+        .ico-right {
+            display: inline-block;
+            height: 24px;
+            width: 24px;
+            background: url("http://blog.fengdb.com/public/imgs/arrow-right.png") no-repeat;
+            background-position: center;
+            background-size: 100%;
+        }
+    </style>
 </head>
 <body>
 
 <div class="wrapper">
-    <header class="page-nav">
-        <nav class="container">泉州恒益餐饮食品有限公司</nav>
+    <!--公共头部-->
+    <header class="pager-header">
+        <!--顶部Logo栏-->
+        <nav class="page-nav"><div class="container" style="z-index: 20;">泉州恒益餐饮食品有限公司</div></nav>
+        <div class="page-banner container" >
+            <!-- 轮播效果 -->
+            <section id="focus" class="focus">
+                <div class="hd">
+                    <ul></ul>
+                </div>
+                <div class="bd">
+                    <ul>
+                        <li><a href="#"><img data-src="/imgs/banner01.jpg" src="/imgs/blank.png" /></a></li>
+                        <li><a href="#"><img data-src="/imgs/banner01.jpg" src="/imgs/blank.png"/></a></li>
+                        <li><a href="#"><img data-src="/imgs/banner01.jpg" src="/imgs/blank.png"/></a></li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+        <!-- nav-menu -->
+        <div class="nav-menu">
+            <section class="container">
+                <ul class="nav-bar">
+                    <li><a href="">网站首页</a></li>
+                    <li><a href="">公司简介</a></li>
+                    <li><a href="">产品展示</a></li>
+                    <li><a href="">新闻资讯</a></li>
+                    <li><a href="">人才招聘</a></li>
+                    <li><a href="">联系方式</a></li>
+                </ul>
+            </section>
+        </div>
     </header>
-    <article>
+    <!--主要内容-->
+    <article class="container main-container clear">
+        <section class="menu-column">
+            <h3 class="pro-type">产品分类</h3>
+            <div class="type-list">
+                <section><a href="">早餐</a></section>
+                <section><a href="">早餐</a></section>
+                <section><a href="">早餐</a></section>
+                <section><a href="">早餐</a></section>
+            </div>
+            <div class="contact">
+                <h3 class="pro-type">联系我们</h3>
+                <p>贵州恒亿餐饮管理有限公司<br>
+                    合作热线<br>
+                    欧先生：18585816588<br>
+                    黎先生：13662698058<br>
+                    地址：贵州省贵阳市云岩区环城东路555号01层</p>
+            </div>
+        </section>
+
+        <section class="content-column">
+            <section class="breadcrumb">
+                <span>一级导航</span><span style="color: #1c94c4;"> > </span><span>二级导航</span>
+            </section>
+            <div class="pro-list">
+                <section class="list-item">
+                    <img src="/imgs/01.jpg" alt="" >
+                    <p class="" style="text-align: center;">标题</p>
+                </section>
+                <section class="list-item">
+                    <img src="/imgs/01.jpg" alt="" >
+                    <p class="" style="text-align: center;">标题</p>
+                </section>
+                <section class="list-item">
+                    <img src="/imgs/01.jpg" alt="" >
+                    <p class="" style="text-align: center;">标题</p>
+                </section>
+                <section class="list-item">
+                    <img src="/imgs/01.jpg" alt="" >
+                    <p class="" style="text-align: center;">标题</p>
+                </section>
+                <section class="list-item">
+                    <img src="/imgs/01.jpg" alt="" >
+                    <p class="" style="text-align: center;">标题</p>
+                </section>
+                <section class="list-item">
+                    <img src="/imgs/01.jpg" alt="" >
+                    <p class="" style="text-align: center;">标题</p>
+                </section>
+                <section class="list-item">
+                    <img src="/imgs/01.jpg" alt="" >
+                    <p class="" style="text-align: center;">标题</p>
+                </section>
+                <section class="list-item">
+                    <img src="/imgs/01.jpg" alt="" >
+                    <p class="" style="text-align: center;">标题</p>
+                </section>
+            </div>
+        </section>
+
 
     </article>
-    <footer>
-
+    <footer class="page-footer">
+        <div class="container" style="text-align: center;color: #ECF0F1;padding: 20px;">
+            <span>网站版权所有@贵州恒亿餐饮管理有限公司<br>
+欧先生：18585816588 黎先生：13662698058 地址：贵州省贵阳市云岩区环城东路555号01层<br><a href="../system/AdminLogin.asp" target="_blank">网站管理</a></span>
+        </div>
     </footer>
 </div>
 
 
+<script src="/static/libs/jquery/3.2.1/jquery-3.2.1.js"></script>
+<!--<script src="//code.jquery.com/jquery-latest.min.js"></script>-->
+
+<script src="/static/libs/touchSlider/TouchSlide.1.1.js"></script>
+<script>
+    $(function () {
+//        $('.banner').unslider();
+        TouchSlide({
+            slideCell:"#focus",
+            titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+            mainCell:".bd ul",
+            targetCell: "a",
+            effect:"left",
+            autoPlay:true,//自动播放
+            autoPage:true, //自动分页
+            switchLoad:"data-src" //切换加载，真实图片路径为"data-src"
+        });
+//        $.ajax({
+//            url: "",
+//            methods: "get",
+//            success: function (res) {
+//
+//            },
+//            error: function (res) {
+//
+//            }
+//        });
+    });
+</script>
 </body>
 </html>

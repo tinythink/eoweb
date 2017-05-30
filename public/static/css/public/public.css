@@ -1,0 +1,236 @@
+/**
+ **********************************
+ |  这里包括头部尾部以及公共的CSS   |
+ **********************************
+ **/
+
+/**
+ *  top nav样式
+ */
+.page-header {
+    /*height: 80px;*/
+    /*background-color: #1ABC9C;*/
+}
+
+.page-nav {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 80px;
+    background-color: #34495E;
+    opacity: 0.5;
+    z-index: 11;
+}
+
+.page-banner {
+
+}
+
+.nav-menu {
+    height: 60px;
+    background-color: #34495E;
+}
+
+.page-footer {
+    height: 150px;
+    background-color: #34495E;
+}
+
+/**
+ * ------------------
+ *  轮播
+ * -------------------
+ */
+.focus {
+    width: 100%;
+    height: 300px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.focus .hd {
+    width: 100%;
+    height: 11px;
+    position: absolute;
+    z-index: 1;
+    bottom: 15px;
+    text-align: center;
+}
+
+.focus .hd ul {
+    display: inline-block;
+    height: 5px;
+    border-radius: 5px;
+    font-size: 0;
+    vertical-align: top;
+    padding: 3px 5px;
+}
+
+.focus .hd ul li {
+    display: inline-block;
+    width: 60px;
+    height: 10px;
+    border-radius: 5px;
+    background: rgba(250, 250, 250, 0.5);
+    vertical-align: top;
+    overflow: hidden;
+    margin: 0 5px;
+}
+
+.focus .hd ul .on {
+    background: red;
+}
+
+.focus .bd {
+    position: relative;
+    z-index: 0;
+}
+
+.focus .bd li img {
+    width: 100%;
+    height: 300px;
+    background: url('/imgs/loading.gif') center center no-repeat;
+}
+
+.focus .bd li a {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/**
+ * ------------------
+ *  轮播
+ * -------------------
+ */
+.nav-bar {
+    /*display: flex;*/
+
+}
+
+.nav-bar li {
+    /*flex: 1;*/
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    float: left;
+    height: 60px;
+    width: 150px;
+    text-align: center;
+    line-height: 60px;
+    list-style: none;
+}
+
+.nav-bar li a {
+    text-decoration: none;
+    color: #ECF0F1;
+}
+
+.nav-bar li:hover {
+    background-color: #3498DB;
+    color: white;
+}
+
+/**
+ * ------------------
+ *  主要内容
+ * -------------------
+ */
+.main-container {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.menu-column {
+    float: left;
+    width: 250px;
+    min-height: 500px;
+    border: 1px dashed gainsboro;
+}
+
+.menu-column .pro-type {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    color: white;
+    background-color: #3498DB;
+}
+
+.content-column {
+    float: left;
+    width: 900px;
+    min-height: 700px;
+    margin-left: 20px;
+    border: 1px dashed gainsboro;
+}
+
+.type-list {
+    padding: 15px;
+    min-height: 500px;
+    background-color: #ECF0F1;
+}
+
+.type-list > section {
+    width: 100%;
+    height: 42px;
+    line-height: 42px;
+    text-align: center;
+    border-radius: 20px;
+    border: 1px solid #34495E;
+    margin-top: 10px;
+    /*background-color: #34495E;*/
+}
+
+.type-list > section a {
+    /*color: #34495E;*/
+}
+
+.contact {
+    height: 200px;
+    width: 100%;
+    border: 1px dashed #34495E;
+    margin-top: 20px;
+}
+
+.breadcrumb {
+    height: 50px;
+    padding: 10px;
+    border-bottom: 2px double blueviolet;
+}
+
+.breadcrumb > li {
+    display: inline-block;
+}
+
+.breadcrumb > li + li:before {
+    padding: 0 5px;
+    color: #ccc;
+    content: "/\00a0";
+}
+
+.breadcrumb > .active {
+    color: #777;
+}
+
+.pro-list {
+    width: 100%;
+    padding: 15px 0;
+}
+.pro-list > .list-item {
+    float: left;
+    width: 210px;
+    height: 220px;
+    margin-left: 19px;
+}
+.list-item img {
+    width: 210px;
+    height: 200px;
+}
+.list-item .food-intro {
+    text-align: center;
+    height: 20px;
+    line-height: 20px;
+}
+.pro-list > .list-item:first-of-type {
+    margin-left: 0;
+}

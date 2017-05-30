@@ -1,0 +1,54 @@
+<html>
+<head>
+    <head>
+        {block name="meta"}{include file="public:meta" /}{/block}
+        <title> {block name="title"}danshboard{/block}</title>
+        {block name="css"}{/block}
+    </head>
+</head>
+<body>
+{block name="nav"}{include file="public:nav" /}{/block}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            {block name="siderbar"}{include file="public:siderbar" /}{/block}
+
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <ol class="breadcrumb">
+                <li><a href="/">面板</a></li>
+                <li><a href="/news/">新闻列表</a></li>
+            </ol>
+            {block name="main"}主要内容{/block}
+        </div>
+    </div>
+</div>
+
+
+<script src="/static/libs/jquery/3.2.1/jquery-3.2.1.js"></script>
+<script src="/static/libs/bootstrap/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="/static/scripts/public/ie10-viewport-bug-workaround.js"></script>
+<script>
+    $(function () {
+        $('#logout').on('click',function (event) {
+            event.preventDefault();
+            $.ajax({
+                method: "post",
+                url: "/user/logout",
+                success: function () {
+                    alert('退出登录成功')
+                    window.location.href = "/admin";
+                },
+                error: function () {
+                    alert('退出失败，请检查网络！')
+                }
+            });
+
+        })
+    });
+
+</script>
+{block name="js"}{/block}
+</body>
+</html>

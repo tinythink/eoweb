@@ -1,0 +1,158 @@
+{extend name="public:base" /}
+{block name="css"}
+<style>
+    legend {
+        padding: 15px 0;
+    }
+    .form {
+        padding: 15px;
+        border: 1px dashed gainsboro;
+    }
+</style>
+{/block}
+{block name="title"}类型管理{/block}
+
+{block name="main"}
+<form class="form form-inline">
+    <fieldset>
+        <legend>类型管理</legend>
+        <div class="form-group">
+            <label for="foodType">类型</label>
+            <input type="text" class="form-control" id="foodType" placeholder="请输入类型名称" required>
+        </div>
+        <button type="button" class="btn btn-primary" id="addFoodType">新增</button>
+    </fieldset>
+</form>
+<table class="table table-hover table-bordered"  >
+    <thead>
+    <tr>
+        <th>序号</th>
+        <th>名称</th>
+        <th>插入时间</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody id="content">
+        {volist name="list" id="vo"}
+        <tr>
+        <td>{$vo.id}</td>
+        <td>{$vo.name}</td>
+        <td>{$vo.insert_time|date='Y-m-d H:i:s',###}</td>
+        <td data-id="{$vo.id}">
+            <button type="button" class="btn btn-danger">删除</button>
+            <button type="button" class="btn btn-primary edit">修改</button>
+        </td>
+        </tr>
+        {/volist}
+    </tbody>
+</table>
+<div class="modal fade" tabindex="-1" role="dialog" id="modal" data-id="">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="typeName">类型名称</label>
+                        <input type="text" class="form-control" id="typeName" placeholder="请输入修改的值">
+                    </div>
+                    <!--<button type="submit" class="btn btn-default">保存</button>-->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="save">保存</button>
+                <!--<button type="button" class="btn btn-primary">Save changes</button>--><!--data-dismiss="modal"-->
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+{/block}
+
+{block name="js"}
+<script>
+    $(document).ready(function () {
+        $('#addFoodType').on('click',function () {
+            var foodType = $('#foodType').val();
+            if (foodType.length > 0) {
+                $.ajax({
+                    url: "/admin/types/add",
+                    method: "post",
+                    data: {name: foodType},
+                    success: function (response) {
+                        console.log(response);
+                        if (response.code === 200) {
+                            alert(response.msg)
+                        } else if (response.code === 104){
+                            alert(response.msg)
+                        }
+                    }
+                })
+            } else {
+                alert('请填写类型名称')
+            }
+        });
+
+        var content = $('#content'),
+            modal = $('#modal'),
+            $el;
+        content.on('click','.btn-danger',function () {
+            var $this = $(this),
+                pid = $this.parent().data('id'),
+                pEl = $this.parent().parent();
+
+            var condition = confirm("您确认删除吗？");
+
+            if (condition) {
+                $.ajax({
+                    url: "/admin/types/del",
+                    method: "post",
+                    data: {id: pid},
+                    success: function (response) {
+                        console.log(response);
+                        if (response.code === 200) {
+                            pEl.remove();
+                        } else {
+                            alert(response.msg)
+                        }
+                    }
+                })
+            }
+        });
+        content.on('click','.edit',function () {
+            modal.modal('show');
+            var $this = $(this),
+                $gp = $this.parent().prev().prev(),
+                id = $this.parent().data('id');
+            modal.data('id',id);
+            $el = $gp;
+        });
+
+        $('#save').on('click',function () {
+            modal.modal('hide');
+            var $this = $(this),
+                $gp = $this.parent().prev().prev(),
+                typeName = $('#typeName').val(),
+                id = modal.data('id');
+            if (typeName.length > 0) {
+                $.ajax({
+                    url: "/admin/types/update",
+                    method: "post",
+                    data: {id: id,name: typeName},
+                    success: function (response) {
+                        console.log(response);
+                        if (response.code === 200) {
+                            $el.html(typeName);
+                            alert(response.msg)
+                        }
+                    }
+                })
+            }
+
+        })
+    })
+</script>
+{/block}
+

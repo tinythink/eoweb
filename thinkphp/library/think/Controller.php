@@ -68,6 +68,7 @@ class Controller
     // 初始化
     protected function _initialize()
     {
+
     }
 
     /**

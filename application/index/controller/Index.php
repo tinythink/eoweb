@@ -10,4 +10,12 @@ class Index extends Controller
     {
         return $this->fetch('index');
     }
+    public function test()
+    {
+        return $this->fetch('index/test');
+    }
+    public function receive()
+    {
+        return json($_POST);
+    }
 }
