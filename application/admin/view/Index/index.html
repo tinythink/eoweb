@@ -16,26 +16,26 @@
 {block name="main"}
 <h1 class="page-header">Dashboard</h1>
 
-<div class="row placeholders">
+<div class="row placeholders" id="container" data-id="/admin">
     <div class="col-xs-6 col-sm-3 placeholder">
         <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
              height="200" class="img-responsive" alt="Generic placeholder thumbnail">
         <h4>主面板</h4>
         <span class="text-muted">主面板</span>
     </div>
-    <div class="col-xs-6 col-sm-3 placeholder">
+    <div class="col-xs-6 col-sm-3 placeholder" data-id="/admin/type">
         <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
              height="200" class="img-responsive" alt="Generic placeholder thumbnail">
         <h4>类型管理</h4>
         <span class="text-muted">类型管理管理</span>
     </div>
-    <div class="col-xs-6 col-sm-3 placeholder">
+    <div class="col-xs-6 col-sm-3 placeholder" data-id="/admin/food">
         <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
              height="200" class="img-responsive" alt="Generic placeholder thumbnail">
         <h4>食物管理</h4>
         <span class="text-muted">食物管理相关</span>
     </div>
-    <div class="col-xs-6 col-sm-3 placeholder">
+    <div class="col-xs-6 col-sm-3 placeholder" data-id="/admin/news">
         <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
              height="200" class="img-responsive" alt="Generic placeholder thumbnail">
         <h4>新闻管理</h4>
@@ -176,26 +176,9 @@
 {block name="js"}
 <script>
     $(document).ready(function () {
-        $('#addFoodType').on('click', function () {
-            var foodType = $('#foodType').val();
-
-            if (foodType.length > 0) {
-                $.ajax({
-                    url: "/type/add",
-                    method: "post",
-                    data: {name: foodType},
-                    success: function (response) {
-                        console.log(response);
-                        if (response.code === 200) {
-                            alert(response.msg)
-                        } else if (response.code === 104) {
-                            alert(response.msg)
-                        }
-                    }
-                })
-            } else {
-                alert('请填写类型名称')
-            }
+        var $container = $('#container');
+        $container.on('click','.placeholder',function () {
+            window.location.href = $(this).data('id');
         })
     })
 </script>

@@ -24,19 +24,19 @@ return [
     '/user/logout' => 'admin/user/logout',
     '/user/find' => 'admin/user/find_user',
 
-    '/type/index' => 'admin/types/index',
+    '/admin/type' => 'admin/types/index',
     '/type/add' => 'admin/types/add',
     '/type/del' => 'admin/types/del',
     '/type/find' => 'admin/types/find',
     '/type/update' => 'admin/types/update',
 
-    '/food/index' => 'admin/foods/index',
+    '/admin/food' => 'admin/foods/index',
     '/food/add' => 'admin/foods/add',
     '/food/del' => 'admin/foods/del',
     '/food/find' => 'admin/foods/find',
     '/food/update' => 'admin/foods/update',
 
-    '/news/index' => 'admin/news/index',
+    '/admin/news' => 'admin/news/index',
     '/news/add' => 'admin/news/add',
     '/news/doAdd' => 'admin/news/doAdd',
     '/news/edit' => 'admin/news/edit',
