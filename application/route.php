@@ -16,7 +16,7 @@ return [
         ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
         ':name' => ['index/hello', ['method' => 'post']],
     ],
-
+    '/list/:type' => 'index/index/type',
     '/upload' => 'admin/foods/upload',
 
     '/user/login' => 'admin/user/index',

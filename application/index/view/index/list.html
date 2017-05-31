@@ -10,30 +10,7 @@
     <link rel="stylesheet" href="/static/css/public/utils.css">
     <link rel="stylesheet" href="/static/css/public/public.css">
     <style>
-        .ico-right {
-            display: inline-block;
-            height: 24px;
-            width: 24px;
-            background: url("http://blog.fengdb.com/public/imgs/arrow-right.png") no-repeat;
-            background-position: center;
-            background-size: 100%;
-        }
-        .pure-g [class *= "pure-u"] {
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-            padding: .5em;
-        }
-        .top-margin {
-            margin-top: 15px;
-        }
-        .item img {
-            border-radius: 4px;
-        }
-        .item p {
-            text-align: center;
-            padding-top: .5em;
-        }
+
     </style>
 </head>
 <body>
@@ -78,22 +55,27 @@
             <div class="pure-u-1-5">
                 <h3 class="pro-type">产品分类</h3>
                 <div class="type-list">
+                    <!--<section><a href="">早餐</a></section>-->
+                    <!--<section><a href="">早餐</a></section>-->
+                    <!--<section><a href="">早餐</a></section>-->
+                    <!--<section><a href="">早餐</a></section>-->
                     {volist name="type" id="vo"}
                     <section><a href="/list/{$vo.id}">{$vo.name}</a></section>
                     {/volist}
                 </div>
+
                 <div class="contact">
                     <h3 class="pro-type">联系我们</h3>
                     <h3>贵州恒亿餐饮管理有限公司</h3>
                     <strong>合作热线</strong>
-                        <p><label>欧先生：</label>18585816588</p>
-                        <p><label>欧先生：</label>18585816588</p>
-                        <address>地址：贵州省贵阳市云岩区环城东路555号01层</address>
+                    <p><label>欧先生：</label>18585816588</p>
+                    <p><label>欧先生：</label>18585816588</p>
+                    <address>地址：贵州省贵阳市云岩区环城东路555号01层</address>
                 </div>
             </div>
-            <div class="pure-u-4-5">
+            <div class="pure-u-4-5" style="position: relative;">
                 <section class="breadcrumb">
-                    <span>产品展示</span><span style="color: #1c94c4;"> > </span><span>食品列表</span>
+                    <span>一级导航</span><span style="color: #1c94c4;"> > </span><span>二级导航</span>
                 </section>
                 <div class="pure-g top-margin" >
 

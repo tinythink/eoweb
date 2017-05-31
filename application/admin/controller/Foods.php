@@ -38,9 +38,10 @@ class Foods extends BaseController
         $file = $request->file('file');
         // 移动到框架应用根目录/public/uploads/ 目录下
         $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
-        $host = $_SERVER['HTTP_HOST'];
+//        $host = $_SERVER['HTTP_HOST'];
+
         if($info){
-            return json(array('code'=>200,'msg'=>'上传成功','data'=>['url'=>$host.'/uploads/'.$info->getSaveName()]));
+            return json(array('code'=>200,'msg'=>'上传成功','data'=>['url'=>'/uploads/'.$info->getSaveName()]));
         }
         return json(array('code'=>103,'msg'=>'上传成功','data'=>$file->getError()));
     }

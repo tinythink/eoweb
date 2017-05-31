@@ -234,3 +234,29 @@
 .pro-list > .list-item:first-of-type {
     margin-left: 0;
 }
+
+.ico-right {
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    background: url("http://blog.fengdb.com/public/imgs/arrow-right.png") no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+.pure-g [class *= "pure-u"] {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: .5em;
+}
+.top-margin {
+    margin-top: 15px;
+}
+.item img {
+    height: 200px;
+    border-radius: 4px;
+}
+.item p {
+    text-align: center;
+    padding-top: .5em;
+}

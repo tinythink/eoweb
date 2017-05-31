@@ -25,3 +25,13 @@
     content: ' ';
     clear: both;
 }
+.pagination {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.pagination li {
+    float: left;
+    padding: 0 10px;
+    font-size: 16px;
+}
