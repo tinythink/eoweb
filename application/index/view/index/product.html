@@ -1,0 +1,114 @@
+{extend name="public:base" /}
+{block name="title"}解决方案{/block}
+{block name="css"}
+<style>
+   .thumbnail img {
+        height: 105px;
+        width: auto;
+   }
+   .thumbnail p {
+       text-align: center;
+   }
+
+</style>
+{/block}
+
+{block name="content"}
+<div class="row" id="container">
+    <div class="col-md-3">
+        <div class="list-group">
+            <span class="list-group-item-heading list-group-item list-group-item-info">
+                食品分类
+            </span>
+            {volist name="type" id="vo"}
+            {if condition="($vo.id == 1) "}
+            <a href="/product/{$vo.id}" class="list-group-item active" data-id="{$vo.id}">{$vo.name}</a>
+            {else /}
+            <a href="/product/{$vo.id}" class="list-group-item" data-id="{$vo.id}">{$vo.name}</a>
+            {/if}
+
+            {/volist}
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>联系我们</strong>
+            </div>
+            <div class="panel-body">
+                <h4>贵州恒亿餐饮管理有限公司</h4>
+                <strong>合作热线</strong>
+                <p><label>欧先生：</label>18585816588</p>
+                <p><label>欧先生：</label>18585816588</p>
+                <address>地址：贵州省贵阳市云岩区环城东路555号01层</address>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9 row">
+        <div class="row" style="min-height: 500px;">
+            {volist name='list' id='vo'}
+            <div class="col-sm-4 col-md-3 col-xl-6 ">
+                <div class="thumbnail">
+                    <img src="{$vo.thumb}" alt="...">
+                    <div class="caption">
+                        <!--<h3>{$vo.name}</h3>-->
+                        <p>{$vo.name}</p>
+                        <!--<p><a href="#" class="btn btn-primary" role="button">查看详情</a> </p>-->
+                    </div>
+                </div>
+            </div>
+            {/volist}
+        </div>
+        <div class="container-fluid">
+            {$page}
+            <form class="form form-inline" aria-label="...">
+                <ul class="pager">
+                    <li>总 <strong>11</strong> 页</li>
+                    <li><button type="button" class="btn btn-info">上一页</button></li>
+                    <li><button type="button" class="btn btn-info">上一页</button></li>
+                    <li><button type="button" class="btn btn-primary">Go</button> <input type="number" class="form-control" style="width: 50px;"> 页</li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="tpl">
+    <% for (var i = 0; i < list.length; i++) { %>
+    <div class="col-sm-4 col-md-3 col-xl-6 ">
+        <div class="thumbnail">
+            <img src="<%= list[i].thumb %>" alt="...">
+            <div class="caption">
+                <!--<h3>{$vo.name}</h3>-->
+                <p><%= list[i].name %></p>
+                <!--<p><a href="#" class="btn btn-primary" role="button">查看详情</a> </p>-->
+            </div>
+        </div>
+    </div>
+
+    <% } %>
+</script>
+{/block}
+{block name="js"}
+<!--<script src="/static/libs/template/template-native.js"></script>-->
+<script>
+//    $(document).ready(function () {
+//        var $container = $('#container');
+//        $container.on('click','.list-group-item',function (e) {
+//            e.preventDefault();
+//            var $this = $(this),
+//                id = $this.data('id');
+//            $this.addClass('active').siblings().removeClass('active');
+//            $.ajax({
+//                method: 'get',
+//                url: '/food/find',
+//                dataType: 'json',
+//                data: {id:id},
+//                success: function (res) {
+//                    console.log(res);
+//                },
+//                error: function (response) {
+//
+//                }
+//            })
+//        })
+//    })
+</script>
+{/block}

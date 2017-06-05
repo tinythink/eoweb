@@ -18,16 +18,7 @@ class Index extends Controller
 
     public function index()
     {
-        $list = Db::name("foods")
-            ->alias('f')
-            ->join("eo_type t","f.t_id=t.id","left")
-            ->field('f.id,f.name,f.thumb')
-            ->order('f.insert_time')
-            ->where("f.sts",'>',0)
-            ->where("t.sts",'>',0)
-            ->paginate(10);
-        $page = $list->render();
-        return $this->fetch('index',array('type'=>$this->type,'page'=>$page,'list'=>$list));
+        return $this->fetch('index',array('active'=>'index'));
     }
     public function type($type)
     {
@@ -48,8 +39,52 @@ class Index extends Controller
         $page = $list->render();
         return $this->fetch('index/list',array('type'=>$this->type,'page'=>$page,'list'=>$list));
     }
-    public function receive()
+    public function product(Request $request)
     {
-        return json($_POST);
+        $param = $request->request();
+        $id = isset($param['id']) ? $param['id'] : 1;
+        $list = Db::name("foods")
+            ->alias('f')
+            ->join("eo_type t","f.t_id=t.id","left")
+            ->field('f.id,f.name,f.thumb')
+            ->order('f.insert_time')
+            ->where("f.sts",'>',0)
+            ->where("t.sts",'>',0)
+            ->where('f.t_id',$id)
+            ->paginate(5);
+        // 把分页数据赋值给模板变量list
+        $this->assign('list', $list);
+        // 渲染模板输出
+//        return $this->fetch();
+        $page = $list->render();
+        return $this->fetch('index/product',array('type'=>$this->type,'page'=>$page,'list'=>$list,'active'=>'product'));
+    }
+    public function find(Request $request)
+    {
+        // 获取客户端提交的数据
+        $param =  $request->request();
+        if (!isset($param['id'])) {
+            return json(array('code'=>103,'msg'=>'参数不正确'));
+        }
+        $list = Db::table('eo_foods')
+            ->alias('f')
+            ->join('eo_type t','f.t_id = t.id','LEFT')
+            ->field('f.id,f.name,f.insert_time,t.name as type')
+            ->where('t.sts','>',0)
+            ->where('f.sts','>',0)
+            ->where(['f.t_id'=>$param['id']])
+            ->select();
+        if ($list) {
+            return json(array('code'=>200,'msg'=>'查询成功','data'=>$list));
+        }
+        return json(array('code'=>109,'msg'=>'查询失败'));
+    }
+    public function about()
+    {
+        return $this->fetch('index/about',array('active'=>'about'));
+    }
+    public function concat()
+    {
+        return $this->fetch('index/concat',array('active'=>'concat'));
     }
 }

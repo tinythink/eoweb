@@ -1,153 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>企业网站</title>
-    <link rel="stylesheet" href="/static/css/public/reset.css">
-    <link rel="stylesheet" href="/static/libs/pure/grids.css">
-    <link rel="stylesheet" href="/static/css/public/utils.css">
-    <link rel="stylesheet" href="/static/css/public/public.css">
-    <style>
-        .ico-right {
-            display: inline-block;
-            height: 24px;
-            width: 24px;
-            background: url("http://blog.fengdb.com/public/imgs/arrow-right.png") no-repeat;
-            background-position: center;
-            background-size: 100%;
-        }
-        .pure-g [class *= "pure-u"] {
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-            padding: .5em;
-        }
-        .top-margin {
-            margin-top: 15px;
-        }
-        .item img {
-            border-radius: 4px;
-        }
-        .item p {
-            text-align: center;
-            padding-top: .5em;
-        }
-    </style>
-</head>
-<body>
-
-<div class="wrapper">
-    <!--公共头部-->
-    <header class="pager-header">
-        <!--顶部Logo栏-->
-        <nav class="page-nav"><div class="container" style="z-index: 20;">泉州恒益餐饮食品有限公司</div></nav>
-        <div class="page-banner container" >
-            <!-- 轮播效果 -->
-            <section id="focus" class="focus">
-                <div class="hd">
-                    <ul></ul>
-                </div>
-                <div class="bd">
-                    <ul>
-                        <li><a href="#"><img data-src="/imgs/banner01.jpg" src="/imgs/blank.png" /></a></li>
-                        <li><a href="#"><img data-src="/imgs/banner01.jpg" src="/imgs/blank.png"/></a></li>
-                        <li><a href="#"><img data-src="/imgs/banner01.jpg" src="/imgs/blank.png"/></a></li>
-                    </ul>
-                </div>
-            </section>
-        </div>
-        <!-- nav-menu -->
-        <div class="nav-menu">
-            <section class="container">
-                <ul class="nav-bar">
-                    <li><a href="">网站首页</a></li>
-                    <li><a href="">公司简介</a></li>
-                    <li><a href="">产品展示</a></li>
-                    <li><a href="">新闻资讯</a></li>
-                    <li><a href="">人才招聘</a></li>
-                    <li><a href="">联系方式</a></li>
-                </ul>
-            </section>
-        </div>
-    </header>
-    <!--主要内容-->
-    <article class="container main-container clear">
-        <div class="pure-g">
-            <div class="pure-u-1-5">
-                <h3 class="pro-type">产品分类</h3>
-                <div class="type-list">
-                    {volist name="type" id="vo"}
-                    <section><a href="/list/{$vo.id}">{$vo.name}</a></section>
-                    {/volist}
-                </div>
-                <div class="contact">
-                    <h3 class="pro-type">联系我们</h3>
-                    <h3>贵州恒亿餐饮管理有限公司</h3>
-                    <strong>合作热线</strong>
-                        <p><label>欧先生：</label>18585816588</p>
-                        <p><label>欧先生：</label>18585816588</p>
-                        <address>地址：贵州省贵阳市云岩区环城东路555号01层</address>
-                </div>
-            </div>
-            <div class="pure-u-4-5">
-                <section class="breadcrumb">
-                    <span>产品展示</span><span style="color: #1c94c4;"> > </span><span>食品列表</span>
-                </section>
-                <div class="pure-g top-margin" >
-
-                    {volist name='list' id='vo'}
-                    <section class="pure-u-1-4 item">
-                        <img src="{$vo.thumb}" alt="" >
-                        <p>{$vo.name}</p>
-                    </section>
-                    {/volist}
-
-                </div>
-                {$page}
-            </div>
-        </div>
+{extend name="public:base" /}
+{block name="content"}
+<!-- Three columns of text below the carousel -->
+<div class="row">
+    <div class="col-lg-4">
+        <img class="img-circle"
+             src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+             alt="Generic placeholder image" width="140" height="140">
+        <h2>公司介绍</h2>
+        <p>
+            贵州恒亿餐饮管理有限公司创办于2014年，公司注册资本5000万元,公司类型为有限责任公司,公司主要业务是从事学校及企事业单位的后勤管理和服务;前身为深圳市精诚饮食服务管理有限公司贵州分公司...</p>
+        <p><a class="btn btn-default" href="#" role="button">查看详情 &raquo;</a></p>
+    </div><!-- /.col-lg-4 -->
+    <div class="col-lg-4">
+        <img class="img-circle"
+             src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+             alt="Generic placeholder image" width="140" height="140">
+        <h2>产品解决方案展示</h2>
+        <p>泉州第六中学提供了一个比较完善的解决方案，公司风采
+            反四风落实八项规定 莫让食堂"同吃"走了样！
+            贵州食堂承包公司找哪家比较可靠？
+            食堂承包-恒亿餐饮：膳食养生知识大全...</p>
+        <p><a class="btn btn-default" href="#" role="button">查看详情 &raquo;</a></p>
+    </div><!-- /.col-lg-4 -->
+    <div class="col-lg-4">
+        <img class="img-circle"
+             src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+             alt="Generic placeholder image" width="140" height="140">
+        <h2>公司大事件</h2>
+        <p>公司风采
+            反四风落实八项规定 莫让食堂"同吃"走了样！
+            贵州食堂承包公司找哪家比较可靠？
+            食堂承包-恒亿餐饮：膳食养生知识大全
+            4种途径，食堂承包-恒亿餐饮教你找到合适的食堂承包商？</p>
+        <p><a class="btn btn-default" href="#" role="button">查看详情&raquo;</a></p>
+    </div><!-- /.col-lg-4 -->
+</div><!-- /.row -->
 
 
-    </article>
-    <footer class="page-footer">
-        <div class="container" style="text-align: center;color: #ECF0F1;padding-top: 30px;">
-            <p>网站版权所有@贵州恒亿餐饮管理有限公司</p>
-            <p>欧先生：18585816588 黎先生：13662698058 地址：贵州省贵阳市云岩区环城东路555号01层</p>
-        </div>
-    </footer>
+<!-- START THE FEATURETTES -->
+
+<hr class="featurette-divider">
+
+<div class="row featurette">
+    <div class="col-md-7">
+        <h2 class="featurette-heading">贵州同心产业园. <span
+                class="text-muted"></span></h2>
+        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod
+            semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
+            commodo.</p>
+    </div>
+    <div class="col-md-5">
+        <img class="featurette-image img-responsive center-block" src="/imgs/jump01.jpg" data-src="holder.js/500x500/auto"
+             alt="Generic placeholder image">
+    </div>
 </div>
 
+<hr class="featurette-divider">
 
-<script src="/static/libs/jquery/3.2.1/jquery-3.2.1.js"></script>
-<!--<script src="//code.jquery.com/jquery-latest.min.js"></script>-->
+<div class="row featurette">
+    <div class="col-md-7 col-md-push-5">
+        <h2 class="featurette-heading">这里是推荐食品. <span class="text-muted">See for yourself.</span>
+        </h2>
+        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod
+            semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
+            commodo.</p>
+    </div>
+    <div class="col-md-5 col-md-pull-7">
+        <img class="featurette-image img-responsive center-block" src="/imgs/tuijianshipin01.jpg" data-src="holder.js/500x500/auto"
+             alt="Generic placeholder image">
+    </div>
+</div>
 
-<script src="/static/libs/touchSlider/TouchSlide.1.1.js"></script>
-<script>
-    $(function () {
-//        $('.banner').unslider();
-        TouchSlide({
-            slideCell:"#focus",
-            titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
-            mainCell:".bd ul",
-            targetCell: "a",
-            effect:"left",
-            autoPlay:true,//自动播放
-            autoPage:true, //自动分页
-            switchLoad:"data-src" //切换加载，真实图片路径为"data-src"
-        });
-//        $.ajax({
-//            url: "",
-//            methods: "get",
-//            success: function (res) {
-//
-//            },
-//            error: function (res) {
-//
-//            }
-//        });
-    });
-</script>
-</body>
-</html>
+<hr class="featurette-divider">
+
+<div class="row featurette">
+    <div class="col-md-7">
+        <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
+        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod
+            semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
+            commodo.</p>
+    </div>
+    <div class="col-md-5">
+        <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto"
+             alt="Generic placeholder image">
+    </div>
+</div>
+
+<hr class="featurette-divider">
+
+<!-- /END THE FEATURETTES -->
+{/block}

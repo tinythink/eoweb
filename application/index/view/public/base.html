@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    {block name="meta"}{include file="public:seo" /}{/block}
+    <title> {block name="title"}泉州伟民饮食有限公司{/block}</title>
+    {block name="css"}
+
+    {/block}
+
+</head>
+<!-- NAVBAR
+================================================== -->
+<body>
+{block name="meta"}{include file="public:nav" /}{/block}
+<!-- Marketing messaging and featurettes
+================================================== -->
+<!-- Wrap the rest of the page in another container to center all the content. -->
+
+<div class="container marketing">
+
+    <div class="main-content">
+        {block name="content"}{/block}
+    </div>
+
+
+
+</div><!-- /.container -->
+
+{block name="nav"}{include file="public:footer" /}{/block}
+<!-- Bootstrap core JavaScript
+================================================== -->
+<script src="/static/libs/jquery/1.12.3/jquery.min.js"></script>
+<script src="/static/libs/bootstrap/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="/static/scripts/public/ie10-viewport-bug-workaround.js"></script>
+<script src="/static/scripts/public/holder.min.js"></script>
+{block name="js"}{/block}
+</body>
+</html>

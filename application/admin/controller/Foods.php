@@ -61,20 +61,21 @@ class Foods extends BaseController
     public function find(Request $request)
     {
         // 获取客户端提交的数据
-        $param=  $request->param();
+        $param =  $request->request();
         if (!isset($param['id'])) {
             return json(array('code'=>103,'msg'=>'参数不正确'));
         }
-        $type = Db::name('foods');
-        $list = $type->where(['id'=>$param['id']])
-            ->find();
-//        $data = Db::table('eo_foods')
-//            ->alias('f')
-//            ->join('eo_type t','f.t_id = t.id','LEFT')
-//            ->field('f.id,f.name,f.insert_time,t.name as type')
-//            ->where('t.sts','>',0)
-//            ->where('f.sts','>',0)
-//            ->select();
+//        $type = Db::name('foods');
+//        $list = $type->where(['id'=>$param['id']])
+//            ->find();
+        $list = Db::table('eo_foods')
+            ->alias('f')
+            ->join('eo_type t','f.t_id = t.id','LEFT')
+            ->field('f.id,f.name,f.insert_time,t.name as type')
+            ->where('t.sts','>',0)
+            ->where('f.sts','>',0)
+            ->where(['f.tid'=>$param['id']])
+            ->select();
         if ($list) {
             return json(array('code'=>200,'msg'=>'查询成功','data'=>$list));
         }
