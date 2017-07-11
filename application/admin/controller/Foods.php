@@ -7,9 +7,17 @@ class Foods extends BaseController
 {
     public function index()
     {
-        $re = Db::query('select f.id,f.name,f.insert_time,t.name as type from eo_foods f LEFT JOIN eo_type t ON f.t_id = t.id where f.sts > 0');
-        $types = Db::name('type')->field(['id','name'])->select();
-        return $this->fetch('foods/index',array("active"=>"food","list"=>$re,"type"=>$types));
+//        $re = Db::query('select f.id,f.name,f.insert_time,t.name as type from eo_foods f LEFT JOIN eo_type t ON f.t_id = t.id where f.sts > 0');
+        $type = Db::name('type')->where('sts','>',0)->select();
+        $list = Db::name('foods')
+            ->alias('f')
+            ->field('f.id,f.name,f.insert_time,t.name as type')
+            ->join('eo_type t','f.t_id = t.id','LEFT')
+            ->where('t.sts','>',0)
+            ->where('f.sts','>',0)
+            ->paginate(20);
+        $page = $list->render();
+        return $this->fetch('foods/index',array('active'=>'food','page'=>$page,'list'=>$list,'type'=>$type));
     }
 
     public function add (Request $request) {

@@ -51,13 +51,10 @@ class Index extends Controller
             ->where("f.sts",'>',0)
             ->where("t.sts",'>',0)
             ->where('f.t_id',$id)
-            ->paginate(5);
-        // 把分页数据赋值给模板变量list
-        $this->assign('list', $list);
+//            ->limit(0,10)
+            ->select();
         // 渲染模板输出
-//        return $this->fetch();
-        $page = $list->render();
-        return $this->fetch('index/product',array('type'=>$this->type,'page'=>$page,'list'=>$list,'active'=>'product'));
+        return $this->fetch('index/product',array('type'=>$this->type,'list'=>$list,'active'=>'product'));
     }
     public function find(Request $request)
     {
@@ -66,18 +63,38 @@ class Index extends Controller
         if (!isset($param['id'])) {
             return json(array('code'=>103,'msg'=>'参数不正确'));
         }
-        $list = Db::table('eo_foods')
-            ->alias('f')
+        $page = isset($param['page']) ? $param['page'] : 1;
+        $foods = Db::name('foods');
+        $total = $foods->where('t_id',$param['id'])->count('id');
+        $pageSize = 20;
+        $totalPage = $total === 0 ? $total : ceil($total/$pageSize);
+        $start = $page == 1 ? 0 : ($page-1)*$total;
+        $list = $foods->alias('f')
             ->join('eo_type t','f.t_id = t.id','LEFT')
-            ->field('f.id,f.name,f.insert_time,t.name as type')
+            ->field('f.id,f.name,f.thumb')
             ->where('t.sts','>',0)
             ->where('f.sts','>',0)
-            ->where(['f.t_id'=>$param['id']])
+            ->where('f.t_id',$param['id'])
+            ->limit($start,$pageSize)
             ->select();
-        if ($list) {
-            return json(array('code'=>200,'msg'=>'查询成功','data'=>$list));
+        if ($list !== null) {
+            return json(
+                array(
+                    'code'=>200,
+                    'msg'=>'查询成功',
+                    'totalPage'=>$totalPage,
+                    'data'=>['list'=>$list]
+                )
+            );
         }
-        return json(array('code'=>109,'msg'=>'查询失败'));
+        return json(
+            array(
+                'code'=>109,
+                'msg'=>'查询失败',
+                'data'=>['list'=>$list]
+            )
+        );
+
     }
     public function about()
     {

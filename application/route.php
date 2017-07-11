@@ -21,7 +21,7 @@ return [
     '/product/[:id]' => 'index/index/product',
     '/about' => 'index/index/about',
     '/concat' => 'index/index/concat',
-    '/index/find' => 'index/index/find',
+    '/find' => 'index/index/find',
 
     '/user/login' => 'admin/user/index',
     '/user/doLogin' => 'admin/user/do_login',

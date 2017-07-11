@@ -7,8 +7,9 @@ class News extends BaseController
 {
     public function index()
     {
-        $list = Db::name('news')->where('sts > 0')->select();
-        return $this->fetch('news/index',array('list'=>$list,"active"=>"news"));
+        $list = Db::name('news')->where('sts > 0')->paginate(20);
+        $page = $list->render();
+        return $this->fetch('news/index',array('list'=>$list,'page'=>$page,'active'=>'news'));
     }
     public function add()
     {
